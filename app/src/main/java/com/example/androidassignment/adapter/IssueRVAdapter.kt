@@ -56,7 +56,7 @@ class IssueRVAdapter(private val activity: Activity): RecyclerView.Adapter<Recyc
 
     override fun getItemViewType(position: Int): Int {
         return when(position) {
-            5 -> IMAGE
+            4 -> IMAGE
             else -> ISSUE
         }
     }
