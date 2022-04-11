@@ -14,6 +14,7 @@ import com.example.androidassignment.ui.adapter.IssueRVAdapter
 import com.example.androidassignment.base.BaseActivity
 import com.example.androidassignment.data.remote.GithubResponse
 import com.example.androidassignment.databinding.ActivityMainBinding
+import com.example.androidassignment.databinding.ErrorDialogBinding
 import com.example.androidassignment.databinding.InputDialogBinding
 import com.example.androidassignment.network.GithubAPI
 import com.example.androidassignment.ui.issue.IssueActivity
@@ -34,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
 
         adapter = IssueRVAdapter(this@MainActivity)
         binding.nameTv.setOnClickListener{
-            setUpDialog(this@MainActivity, R.layout.input_dialog)
+            setUpDialog(R.layout.input_dialog)
         }
 
         binding.githubRv.layoutManager = LinearLayoutManager(this)
@@ -57,8 +58,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         }
     }
 
-    private fun setUpDialog(context: Context, layout: Int) {
-        val dialog = Dialog(context)
+    private fun setUpDialog(layout: Int) {
+        val dialog = Dialog(this)
         when(layout){
             R.layout.input_dialog -> {
                 val binding = InputDialogBinding.inflate(layoutInflater)
@@ -73,6 +74,14 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                     }
                 }
             }
+            R.layout.error_dialog -> {
+                val binding = ErrorDialogBinding.inflate(layoutInflater)
+                dialog.setContentView(binding.root)
+                dialog.show()
+                binding.positiveBtn.setOnClickListener{
+                    dialog.dismiss()
+                }
+            }
         }
     }
 
@@ -83,6 +92,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                  if(response.code() == 200){
                      listLiveData.postValue(response.body())
                  }
+             } else {
+                 setUpDialog(R.layout.error_dialog)
              }
         }
     }

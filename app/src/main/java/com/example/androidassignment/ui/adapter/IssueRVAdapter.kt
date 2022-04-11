@@ -1,4 +1,4 @@
-package com.example.androidassignment.adapter
+package com.example.androidassignment.ui.adapter
 
 import android.annotation.SuppressLint
 import android.app.Activity
