@@ -49,6 +49,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
                         putExtra("profile", listLiveData.value!![position].user.avatar_url)
                         putExtra("name", listLiveData.value!![position].user.login)
                         putExtra("body", listLiveData.value!![position].body)
+                        putExtra("issue", listLiveData.value!![position].number.toString())
                     }
                     startActivity(intent)
                 }

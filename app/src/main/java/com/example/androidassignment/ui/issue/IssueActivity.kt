@@ -16,6 +16,11 @@ class IssueActivity : BaseActivity<ActivityIssueBinding>(
 
         val intent = intent
 
+        if(intent.hasExtra("issue")) {
+            val title = intent.getStringExtra("issue")
+            supportActionBar?.title = "#$title"
+        }
+
         if(intent.hasExtra("profile")){
             binding.profileIv.clipToOutline = true
             Glide.with(this)
