@@ -2,18 +2,21 @@ package com.example.androidassignment.ui.main
 
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.androidassignment.R
-import com.example.androidassignment.adapter.IssueRVAdapter
+import com.example.androidassignment.ui.adapter.IssueRVAdapter
 import com.example.androidassignment.base.BaseActivity
 import com.example.androidassignment.data.remote.GithubResponse
 import com.example.androidassignment.databinding.ActivityMainBinding
 import com.example.androidassignment.databinding.InputDialogBinding
 import com.example.androidassignment.network.GithubAPI
+import com.example.androidassignment.ui.issue.IssueActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -39,6 +42,17 @@ class MainActivity : BaseActivity<ActivityMainBinding>(
         listLiveData.observe(this) {
             adapter.update(it)
             binding.githubRv.adapter = adapter
+
+            adapter.setOnItemClickListener(object: IssueRVAdapter.OnItemClickListener{
+                override fun onItemClick(v: View, position: Int) {
+                    val intent = Intent(this@MainActivity, IssueActivity::class.java).apply {
+                        putExtra("profile", listLiveData.value!![position].user.avatar_url)
+                        putExtra("name", listLiveData.value!![position].user.login)
+                        putExtra("body", listLiveData.value!![position].body)
+                    }
+                    startActivity(intent)
+                }
+            })
         }
     }
 
