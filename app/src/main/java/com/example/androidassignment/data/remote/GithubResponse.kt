@@ -1,15 +1,11 @@
 package com.example.androidassignment.data.remote
 
 data class GithubResponse(
-    val issues : ArrayList<Issue>
-) {
-    data class Issue(
-        val id: Int,
-        val number: Int,
-        val title: String,
-        val user: User,
-        val body: String
-    )
+    val id: Int,
+    val number: Int,
+    val title: String,
+    val user: User,
+    val body: String) {
     data class User(
         val login: String,
         val id: Int,
