@@ -13,8 +13,9 @@ import com.example.androidassignment.databinding.GithubItemBinding
 import com.example.androidassignment.databinding.ImageItemBinding
 import java.lang.RuntimeException
 
-class IssueRVAdapter(private val items: GithubResponse,private val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
+class IssueRVAdapter(private val activity: Activity): RecyclerView.Adapter<RecyclerView.ViewHolder>(){
 
+    private val items: ArrayList<GithubResponse> = ArrayList()
     interface OnItemClickListener {
         fun onItemClick(v: View, position: Int)
     }
@@ -44,14 +45,14 @@ class IssueRVAdapter(private val items: GithubResponse,private val activity: Act
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = items.issues[position]
+        val item = items[position]
         when(holder) {
             is IssueViewHolder -> holder.apply { bind(item) }
             is ImageViewHolder -> holder.apply { bind() }
         }
     }
 
-    override fun getItemCount() = items.issues.size
+    override fun getItemCount() = items.size
 
     override fun getItemViewType(position: Int): Int {
         return when(position) {
@@ -62,7 +63,7 @@ class IssueRVAdapter(private val items: GithubResponse,private val activity: Act
 
     inner class IssueViewHolder(v : GithubItemBinding) : RecyclerView.ViewHolder(v.root) {
         val view = v
-        fun bind(item : GithubResponse.Issue) {
+        fun bind(item : GithubResponse) {
             view.issueTv.text = "#${item.number}: ${item.title}"
 
             val position = absoluteAdapterPosition
@@ -83,5 +84,12 @@ class IssueRVAdapter(private val items: GithubResponse,private val activity: Act
                 .load(Uri.parse("https://s3.ap-northeast-2.amazonaws.com/hellobot-kr-test/image/main_logo.png"))
                 .into(view.hellobotIv)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun update(items: ArrayList<GithubResponse>){
+        this.items.clear()
+        this.items.addAll(items)
+        notifyDataSetChanged()
     }
 }
