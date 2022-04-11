@@ -10,5 +10,5 @@ interface GithubAPI {
     suspend fun getIssueList(
         @Path("org") org : String,
         @Path("repo") repo : String
-    ) : Response<GithubResponse>
+    ) : Response<ArrayList<GithubResponse>>
 }
