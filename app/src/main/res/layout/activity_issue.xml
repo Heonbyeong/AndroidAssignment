@@ -36,12 +36,19 @@
             android:textStyle="bold"/>
 
     </LinearLayout>
-    
-    <TextView
-        android:id="@+id/detail_tv"
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="20dp"
-        android:textSize="16sp"/>
+        android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/detail_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"/>
+
+    </ScrollView>
 
 </LinearLayout>

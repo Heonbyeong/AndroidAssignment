@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">AndroidAssignment</string>
+<!--  main  -->
+    <string name="hint">Organization / Repository</string>
 <!--  input dialog  -->
     <string name="input_org_hint">Organization</string>
     <string name="input_repo_hint">Repository</string>
