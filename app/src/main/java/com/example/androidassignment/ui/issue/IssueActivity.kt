@@ -1,5 +1,6 @@
 package com.example.androidassignment.ui.issue
 
+import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -34,6 +35,11 @@ class IssueActivity : BaseActivity<ActivityIssueBinding>(
 
         if(intent.hasExtra("body")){
             binding.detailTv.text = intent.getStringExtra("body")
+        }
+
+        binding.profileIv.setOnClickListener{
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://thingsflow.com/ko/home/"))
+            startActivity(intent)
         }
     }
 }
