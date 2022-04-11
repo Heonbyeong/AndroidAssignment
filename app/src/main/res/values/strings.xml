@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">AndroidAssignment</string>
+<!--  input dialog  -->
+    <string name="input_org_hint">Organization</string>
+    <string name="input_repo_hint">Repository</string>
+    <string name="positive_btn_text">확인</string>
+
+<!--  error dialog  -->
+    <string name="error_text">Repository를 조회할 수 없습니다.</string>
 </resources>
